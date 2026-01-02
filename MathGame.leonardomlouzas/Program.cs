@@ -8,8 +8,6 @@ int choice;
 List<int[]> history = new List<int[]>();
 Random randomizer = new Random();
 
-
-
 do
 {
     Console.Clear();
@@ -20,20 +18,9 @@ do
     Console.WriteLine("2. Subtraction challenge");
     Console.WriteLine("3. Multiplication challenge");
     Console.WriteLine("4. Division challenge");
+    Console.WriteLine("5. History");
     Console.WriteLine("'exit' to close the program\n");
-    Console.WriteLine("History:");
 
-    foreach (int[] match in history)
-    {
-        Console.WriteLine(match[0] switch
-        {
-            0 => $"{match[1]} + {match[2]} = {match[3]} : {(match[4] == 1 ? "Correct" : "Incorrect")}",
-            1 => $"{match[1]} - {match[2]} = {match[3]} : {(match[4] == 1 ? "Correct" : "Incorrect")}",
-            2 => $"{match[1]} * {match[2]} = {match[3]} : {(match[4] == 1 ? "Correct" : "Incorrect")}",
-            3 => $"{match[1]} / {match[2]} = {match[3]} : {(match[4] == 1 ? "Correct" : "Incorrect")}",
-            _ => "Unknown operation"
-        });
-    }
 
     input = Console.ReadLine();
     input = input?.Trim();
@@ -45,9 +32,27 @@ do
     }
     Console.Clear();
 
-    if (choice < 5 && choice > 0)
+    if (choice < 6 && choice > 0)
     {
-        Challenges(choice);
+        if (choice == 5) {
+            Console.Clear();
+            foreach (int[] match in history)
+            {
+                Console.WriteLine(match[0] switch
+                {
+                    0 => $"{match[1]} + {match[2]} = {match[3]} : {(match[4] == 1 ? "Correct" : "Incorrect")}",
+                    1 => $"{match[1]} - {match[2]} = {match[3]} : {(match[4] == 1 ? "Correct" : "Incorrect")}",
+                    2 => $"{match[1]} * {match[2]} = {match[3]} : {(match[4] == 1 ? "Correct" : "Incorrect")}",
+                    3 => $"{match[1]} / {match[2]} = {match[3]} : {(match[4] == 1 ? "Correct" : "Incorrect")}",
+                    _ => "Unknown operation"
+                });
+            }
+            Console.WriteLine("\nPress <ENTER> to go back");
+            Console.ReadLine();
+        } else
+        {
+            Challenges(choice);
+        }
     }
 } while (!string.Equals(input, EXIT_COMMAND, StringComparison.OrdinalIgnoreCase));
 
